@@ -1,0 +1,32 @@
+language: node_js
+node_js:
+    - 0.10.33
+
+env:
+    global:
+        - XUNIT_FILE=./shippable/testresults/result.xml
+#        - secure: dQ5X8cmrA2ox21BEC4U3vvILj0a0Uffll2T6V9AniFPjmp0HZCAlLRBWW6XusfPddpghi7O06leFs0HZlZccb20bDABnLmsRKhIHb9zIYg8JFhVHHnbK+2cLXeJLTnQdrD4q7lCl5AK2djbCKHNeRsdw8653mh2J2aJvKc9B00zfM+kBTC5FsJGXGdGVCYV4HknXCsNqCNOm9qVT1NboivxkPETQ/hhRO1fZZ2d9nAlqmcSsGpUxGNUs7i4Ta8YbuCnwwJMXlqRwwJZWwCiERK9jVlPFEEpJncSnIQRU0VT89yUGVvjjdsIblQ9A1jbY3WHVgdw2le7dHKDBLT6Lig==
+
+
+before_install:
+
+    - node --version
+    - npm install -g grunt-cli
+    - mkdir -p ./shippable/testresults
+    - mkdir -p ./shippable/codecoverage
+
+
+install:
+
+    - npm install
+
+script:
+    - mkdir -p ./shippable/buildoutput
+    - touch ./shippable/buildoutput/config.txt
+    - echo $BUILD_NUMBER > ./shippable/buildoutput/config.txt
+    - grunt
+
+
+#after_script:
+#    - ./node_modules/.bin/istanbul cover grunt -- -u tdd
+#    - ./node_modules/.bin/istanbul report cobertura --dir  ./shippable/codecoverage/
