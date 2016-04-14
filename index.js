@@ -1,13 +1,12 @@
-'use strict';
 
-const express = require('express');
+var express = require('express');
 
 
 // Constants
-const PORT = 12021;
+var PORT = 12021;
 
 // App
-const app = express();
+var app = express();
 app.get('/', function (req, res) {
    res.send('Hey Buddy...!!!');
 });
